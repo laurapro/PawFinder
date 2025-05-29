@@ -1,0 +1,39 @@
+.user-type-selector {
+    width: 100%;                                   /* full page width */
+    padding: 6px 0;                                /* small vertical padding */
+    background: rgba(255, 255, 255, 0.05);         /* very subtle white on black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;                             /* smaller text */
+    color: #ddd;                                   /* off-white text */
+  }
+  
+  .selector-options {
+    display: flex;
+    gap: 8px;                                      /* small gap between buttons */
+  }
+  
+  .selector-button {
+    flex: 1;                                       /* let buttons share available space */
+    max-width: 120px;                              /* prevent them from stretching too wide */
+    padding: 4px 8px;
+    margin: 4px;                              /* tighter padding */
+    background: rgba(255, 255, 255, 0.1);          /* slightly more visible base */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: inherit;                                /* use container’s text color */
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  
+  .selector-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  .selector-button.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  

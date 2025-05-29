@@ -1,54 +1,122 @@
-# React + TypeScript + Vite
+# PawFinder Plus – Sample Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **PawFinder Plus**, a sample React application designed to showcase data-driven animal adoption solutions for animal shelters. This project demonstrates how feature flags and user preferences can be integrated to create a dynamic, personalized experience for end users.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Dynamic Animal Listings:**  
+  Displays a curated list of adoptable dogs or cats, tailored to user preferences.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Feature Flag Integration:**  
+  Utilizes [LaunchDarkly](https://launchdarkly.com/) to control feature rollout and personalize content in real time.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Modern UI:**  
+  Clean, responsive interface built with React, TypeScript, and Vite.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Banner Components:**
+  - **Header Banner:** Highlights the app’s mission.
+  - **Preference Banner:** Shows which animal type is currently featured, based on feature flags.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18 or newer recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+### Installation
+
+1. **Clone the repository:**
+
+   ```sh
+   git clone https://github.com/your-org/pawfinder-plus.git
+   cd pawfinder-plus
+   ```
+
+2. **Install dependencies:**
+
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Set up environment variables:**
+   Create a `.env` file in the root of the project and add your LaunchDarkly SDK key:
+
+   ```env
+   VITE_LAUNCHDARKLY_SDK_KEY=your-sdk-key
+   ```
+
+4. **Run the development server:**
+
+   ```sh
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+5. **Open your browser:**  
+   Navigate to `http://localhost:5173` to see the app in action.
+
+---
+## Project Structure
+
+- [`src/App.tsx`](src/App.tsx): Main application component.
+- [`src/components/`](src/components/): UI components (Home, HeaderBanner, PreferenceBanner).
+- [`src/main.tsx`](src/main.tsx): Entry point, LaunchDarkly provider setup.
+- [`public/`](public/): Static assets.
+
+## Customization
+
+- ### Feature Flags
+  Control which banners and animal lists are shown by toggling flags in LaunchDarkly.
+
+  - <span style="color:orange;">**showPreferenceButton:**</span> A boolean flag to control whether the banner is visible. You can demonstrate releasing or rolling back the feature by toggling this flag in LaunchDarkly.  
+    **Instant Updates:** The app uses a listener to detect flag changes in real time. When the flag is toggled, the UI updates instantly—no page reload required.  
+    **Remediation:** If a feature causes issues, you can immediately disable it by turning off the flag (manually via the LaunchDarkly dashboard, API, or CLI), and the app will revert to the previous state without user intervention.
+
+  - <span style="color:orange;">**animalPreference:**</span> Flag around animal list component.
+    **Context Attributes:** The context will be used to target your feature release.
+      ``` 
+      {
+        // The 'kind' property describes the context type.
+        "kind": "foster",
+
+        // The 'key' property can be either:
+        // - "new": for new users or entities
+        // - "existing": for existing users or entities
+        "key": "new", // or "existing"
+
+        // The 'type' property can be either:
+        // - "user": for individual user rules
+        // - "beta": for segment or beta group rules
+        "type": "user" // or "beta"
+      } 
+      ```
+    **Target:** Individual targeting and Rule-based targeting can be set up from the LaunchDarkly dashboard using segments and specifying context attributes.
+
+## Learn More
+
+To learn more about the technologies used in this project, check out the following resources:
+
+- [React Documentation](https://reactjs.org/docs/getting-started.html)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+- [Vite Guide](https://vitejs.dev/guide/)
+- [LaunchDarkly Documentation](https://docs.launchdarkly.com/docs)
+
+---
+
+## Contributing
+
+We welcome contributions to **PawFinder Plus**! If you have suggestions for improvements or new features, please submit an issue or pull request.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.

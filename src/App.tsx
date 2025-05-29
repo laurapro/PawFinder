@@ -1,5 +1,6 @@
 import Home from "./components/Home";
-import PreferenceButton from "./components/PreferenceButton";
+import HeaderBanner from "./components/HeaderBanner";
+import PreferenceBanner from "./components/PreferenceBanner";
 import { useFlags } from "launchdarkly-react-client-sdk";
 import "./App.css";
 
@@ -9,11 +10,14 @@ function App() {
   return (
     <div className="app">
       <header className="header">
-        {showPreferenceButton && <PreferenceButton />}
-      </header>
+        {<HeaderBanner/>}
+        </header>
       <main>
         <Home />
       </main>
+      <footer className="header">
+        {showPreferenceButton && <PreferenceBanner />}
+      </footer>
     </div>
   );
 }

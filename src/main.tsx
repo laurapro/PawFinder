@@ -8,10 +8,8 @@ const LDProvider = withLDProvider({
   clientSideID: "682e433b169fcb08f0717cbb",
   context: {
     kind: "foster",
-    // key: "new", // individual rule
     key: "existing",
-    type: "user",
-    // type: "beta" // segment rule
+    type: "beta"
   },
 })(App);
 

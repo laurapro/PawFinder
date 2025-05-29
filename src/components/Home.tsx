@@ -39,25 +39,30 @@ const Home = () => {
   ];
   const catList: Animal[] = [
     {
-      imgURL:
-        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.-AR61A7CsmEesPO60bjkbAHaEo%26pid%3DApi&f=1&ipt=803585446061b679fd44e611c8e54fc2a19ecc7295ad118ca7f50720b10f1414&ipo=images",
-      name: "whiskers",
-      description: "this is a fluffy lady",
-      breed: "persian",
+      imgURL: "https://i.postimg.cc/Sxhr3HTR/Image.png",
+      name: "Cuddlebug",
+      description:
+        "He doesn't seem bothered by other cats in the home. Eats very well. Extremely friendly and a true Cuddlebug",
+      breed: "n/a",
+    },
+    {
+      imgURL: "https://i.postimg.cc/3x0Tf4qY/A281943-000.jpg",
+      name: "Mittens",
+      description: "3 week old kitten, needs to be bottle fed. 1/2",
+      breed: "",
+    },
+    {
+      imgURL: "https://i.postimg.cc/3JchZCnt/A281941-000.jpg",
+      name: "Milo",
+      description: "3 week old kitten, needs to be bottle fed. 2/2",
+      breed: "",
     },
     {
       imgURL:
-        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.8zPrN1cKXjLvY7jCIWuSyAHaEt%26cb%3Diwp2%26pid%3DApi&f=1&ipt=23790519747a0bd2e02dfa51ce7d025b846171c87b61f8e8f310b7999246caee&ipo=images",
-      name: "shadow",
-      description: "this is a round stocky boy",
-      breed: "british shorthair",
-    },
-    {
-      imgURL:
-        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.5xr8Ljg5Z2zwMjJR9qGJyQHaGL%26cb%3Diwc2%26pid%3DApi&f=1&ipt=912fd681d525100b59e5634cd558b2b9967af02bcc341b61b6e84b04532c190d&ipo=images",
-      name: "milo",
-      description: "this is a playful girl",
-      breed: "siamese",
+        "https://i.postimg.cc/DZwFgjkY/original-BE73-CA8-B-6-C18-4816-B2-B5-484783426189.jpg",
+      name: "Nunu",
+      description: "5 week old kitten, Going 4-5 hours between feedings",
+      breed: "Domestic SH",
     },
   ];
   const list = animalPreference === "cat" ? catList : dogList;
@@ -69,7 +74,7 @@ const Home = () => {
           <div className="card-text">
             <h3>{animal.name}</h3>
             <p>{animal.description}</p> <br />
-            <p>{animal.breed}</p>
+            {animal.breed && animal.breed !== "n/a" && <p>{animal.breed}</p>}
           </div>
         </div>
       ))}

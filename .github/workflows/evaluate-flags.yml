@@ -3,7 +3,9 @@ name: CI with LaunchDarkly Flag Evaluations
 on:
   push:
     branches:
-      - main
+      - master
+    
+  workflow_dispatch:
 
 jobs:
   eval-flags:

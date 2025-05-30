@@ -1,8 +1,24 @@
-import { useFlags } from "launchdarkly-react-client-sdk";
+import { useFlags, useLDClient } from "launchdarkly-react-client-sdk";
 import "./Home.css";
 
 const Home = () => {
   const { animalPreference } = useFlags();
+  const ldClient = useLDClient();
+
+  const trackEvent = (eventKey: string, animalName: string) => {
+    // grab userType from the current context (if you set it via UserTypeSelector)
+    const ctx = ldClient?.getContext();
+    const userType = ctx?.custom?.userType ?? "visitor";
+    console.log(
+      `Tracking event: ${eventKey} for animal: ${animalName} with userType: ${userType}`
+    );
+
+    ldClient?.track(eventKey, {
+      animalName,
+      variation: animalPreference,
+      userType,
+    });
+  };
 
   type Animal = {
     imgURL: string;
@@ -66,10 +82,16 @@ const Home = () => {
     },
   ];
   const list = animalPreference === "cat" ? catList : dogList;
+
   return (
     <>
       {list?.map((animal, index) => (
-        <div className="card" key={index}>
+        <div
+          className="card"
+          key={index}
+          onMouseEnter={() => trackEvent("animal-view", animal.name)}
+          onClick={() => trackEvent("animal-click", animal.name)}
+        >
           <img src={animal.imgURL} alt="Animal" className="card-image" />
           <div className="card-text">
             <h3>{animal.name}</h3>

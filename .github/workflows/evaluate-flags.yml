@@ -1,0 +1,30 @@
+# .github/workflows/evaluate-flags.yml
+name: CI with LaunchDarkly Flag Evaluations
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  eval-flags:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Evaluate flags
+        id: ld
+        uses: launchdarkly/gha-flags@v1.0.1
+        with:
+          # your server-side SDK key stored in GitHub Secrets
+          sdk-key: ${{ secrets.LAUNCHDARKLY_SDK_KEY }}
+
+          # list your flags here, one per line as FLAG_KEY,DEFAULT_VALUE
+          flags: |
+            animalPreference,cat
+            showPreferenceButton,false
+          
+      - name: Print flag values
+        run: |
+          echo "🐱 🐶 ${{ steps.flags.outputs.animalPreference }}"
+          echo ${{ steps.flags.outputs.showPreferenceButton }}

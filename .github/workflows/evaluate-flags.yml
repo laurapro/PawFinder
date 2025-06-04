@@ -22,11 +22,8 @@ jobs:
           sdk-key: ${{ secrets.LAUNCHDARKLY_SDK_KEY }}
 
           # list your flags here, one per line as FLAG_KEY,DEFAULT_VALUE
-          flags: |
-            animalPreference,cat
-            showPreferenceButton,false
-          
+          flags: showPreferenceButton, false
+
       - name: Print flag values
         run: |
-          echo "🐱 🐶 ${{ steps.flags.outputs.animalPreference }}"
-          echo ${{ steps.flags.outputs.showPreferenceButton }}
+          echo "🐱 🐶 ${{ steps.flags.outputs.showPreferenceButton }}"

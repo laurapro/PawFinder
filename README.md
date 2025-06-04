@@ -84,18 +84,15 @@ Welcome to **PawFinder Plus**, a sample React application designed to showcase d
     **Context Attributes:** The context will be used to target your feature release.
       ``` 
       {
-        // The 'kind' property describes the context type.
-        "kind": "foster",
+        "kind": "user",
 
-        // The 'key' property can be either:
-        // - "new": for new users or entities
-        // - "existing": for existing users or entities
-        "key": "new", // or "existing"
+        // The 'key' property is initialized as anonymous then set when clicking view as button:
+        // uses the type
+        "key": anonymous | ${type}-${Date.now()}
 
-        // The 'type' property can be either:
-        // - "user": for individual user rules
-        // - "beta": for segment or beta group rules
-        "type": "user" // or "beta"
+        // The 'userType' is a custom property.
+        // value types are set in UserTypeSelector file
+        "userype": "visitor" | "foster" | "shelter"
       } 
       ```
     **Target:** Individual targeting and Rule-based targeting can be set up from the LaunchDarkly dashboard using segments and specifying context attributes.

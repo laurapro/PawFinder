@@ -9,9 +9,7 @@ const Home = () => {
     // grab userType from the current context (if you set it via UserTypeSelector)
     const ctx = ldClient?.getContext();
     const userType = ctx?.custom?.userType ?? "visitor";
-    console.log(
-      `Tracking event: ${eventKey} for animal: ${animalName} with userType: ${userType}`
-    );
+    console.log(`Tracking event: ${eventKey} for animal: ${animalName}`);
 
     ldClient?.track(eventKey, {
       animalName,

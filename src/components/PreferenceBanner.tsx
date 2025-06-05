@@ -12,7 +12,8 @@ function PreferenceBanner() {
       </p>
       <p className="explanation">
         Based on current user data and engagement metrics, our system is
-        prioritizing {label} today.
+        prioritizing {label} today. Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit.
       </p>
     </div>
   );

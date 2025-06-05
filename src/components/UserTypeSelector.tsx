@@ -4,14 +4,17 @@ import "./UserTypeSelector.css";
 
 const UserTypeSelector = () => {
   const ldClient = useLDClient();
+  const oldCtx = ldClient?.getContext();
   const [selectedType, setSelectedType] = useState("visitor");
 
   const handleTypeChange = async (type: string) => {
     // 1) Build the new context object
     const newContext = {
-      kind: "user", // single “kind” for everyone
       key: `${type}-${Date.now()}`, // unique key per selection
-      userType: type, // visitor | foster | shelter
+      custom: {
+        ...oldCtx?.custom,
+        userType: type, // visitor | foster | shelter
+      },
     };
 
     // 2) Tell the LD SDK to switch to that new context
